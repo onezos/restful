@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mv="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--
+        context:component-scan 标签作用
+        在Spring IoC初始化过程中，自动创建并管理net.kokwind.springmvc及子包中
+        拥有以下注解的对象。
+        @Repository 存放在Dao类上，通常是与数据进行直接交互的类
+        @Service 业务逻辑类，通常是放在Service类上
+        @Controller 用于描述Spring MVC的控制器类
+        @Component  组件，不好区分类型，就使用此注解
+    -->
+    <context:component-scan base-package="net.kokwind.restful" />
+    <!--
+        启用Spring的注解开发模式，默认为false
+        mvc:annotation-driven 标签作用
+        @Controller 用于描述Spring MVC的控制器类
+        @RequestMapping 用于描述请求映射
+        @ResponseBody 用于描述返回JSON数据
+        @RequestParam 用于描述请求参数
+        @PathVariable 用于描述请求路径参数
+        @ModelAttribute 用于描述请求参数
+        @SessionAttributes 用于描述Session属性
+        @ExceptionHandler 用于描述异常处理
+        @InitBinder 用于描述请求参数绑定
+        @PreHandle 用于描述请求参数绑定
+        @PostHandle 用于描述请求参数绑定
+        @AfterHandle 用于描述请求参数绑定
+        @PreHandle 用于描述请求参数绑定
+        @PostHandle 用于描述请求参数绑定
+        @AfterHandle 用于描述请求参数绑定
+      -->
+    <mvc:annotation-driven conversion-service="conversionService">
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>text/xml;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!-- 将图片/JS/CSS等静态资源排除在外，可提高执行效率 -->
+    <mvc:default-servlet-handler/>
+
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="net.kokwind.restful.converter.MyDateConverter"/>
+            </set>
+        </property>
+    </bean>
+
+</beans>

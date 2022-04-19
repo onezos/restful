@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RESTful实验室</title>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btnGet").click(function(){
+                $.ajax({
+                    url:"/restful/request",
+                    type:"get",
+                    dataType:"json",
+                    success:function(json){
+                        $("#message").text(json.message);
+                    }
+                })
+            })
+        })
+
+        $(function(){
+            $("#btnPost").click(function(){
+                $.ajax({
+                    url:"/restful/request",
+                    type:"post",
+                    dataType:"json",
+                    success:function(json){
+                        $("#message").text(json.message);
+                    }
+                })
+            })
+        })
+
+        $(function(){
+            $("#btnPut").click(function(){
+                $.ajax({
+                    url:"/restful/request",
+                    type:"put",
+                    dataType:"json",
+                    success:function(json){
+                        $("#message").text(json.message);
+                    }
+                })
+            })
+        })
+
+        $(function(){
+            $("#btnDelete").click(function(){
+                $.ajax({
+                    url:"/restful/request",
+                    type:"delete",
+                    dataType:"json",
+                    success:function(json){
+                        $("#message").text(json.message);
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <input type="button" id="btnGet" value="发送Get请求">
+    <input type="button" id="btnPost" value="发送post请求">
+    <input type="button" id="btnPut" value="发送Put请求">
+    <input type="button" id="btnDelete" value="发送Delete请求">
+    <h1 id="message"></h1>
+</body>
+</html>
