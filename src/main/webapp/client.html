@@ -21,11 +21,11 @@
         $(function(){
             $("#btnPost").click(function(){
                 $.ajax({
-                    url:"/restful/request",
+                    url:"/restful/request/100",
                     type:"post",
                     dataType:"json",
                     success:function(json){
-                        $("#message").text(json.message);
+                        $("#message").text(json.message + " " + json.id);
                     }
                 })
             })

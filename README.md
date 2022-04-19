@@ -454,3 +454,68 @@ public class RestfulController {
 打开网页
 
 ![img.png](src/main/resources/img/img14.png)
+
+### 1.6 提交到github
+在github新建一个`repository`
+在项目工程目录下执行`git`命令，提交到github
+
+```shell
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:onezos/restful.git
+git push -u origin main
+```
+
+![img.png](src/main/resources/img/img15.png)
+
+
+
+
+
+### 1.7 RestController注解与路径变量
+通过`@RestController`注解，可以将该类设置为RestController，这样该类的所有方法都会被返回json数据，
+这样不需要在每个方法上都使用`@ResponseBody`注解了。
+
+而发送`post /restful/request/100`类似请求，需要使用`/request/{rid}`的形式来指定参数，并在参数名前加上`@PathVariable`注解。
+```java
+package net.kokwind.restful.controller;
+
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/restful")
+public class RestfulController {
+    @GetMapping("/request")
+    public String doGetRequest() {
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"返回查询结果\"}";
+    }
+
+    // 发送post /restful/request/100请求
+    @PostMapping ("/request/{rid}")
+    public String doPostRequest(@PathVariable("rid") Integer requestId) {
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"数据新建成功\",\"id\":"   + requestId + "}";
+    }
+
+    @PutMapping ("/request")
+    public String doPutRequest() {
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"数据更新成功\"}";
+    }
+
+    @DeleteMapping("/request")
+    public String doDeleteRequest() {
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"数据删除成功\"}";
+    }
+}
+
+```
+打开网页测试：
+
+![img.png](src/main/resources/img/img16.png)
+
+提交到github
+![img.png](src/main/resources/img/img17.png)
+

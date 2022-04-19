@@ -9,35 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b190276c-c956-4ef3-adab-9b4f1fdc50e5" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/restful_Web_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/controller/RestfulController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/converter/MyDateConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img10.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img11.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img12.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img13.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img14.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/client.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery-3.3.1.min.js" afterDir="false" />
+    <list default="true" id="b190276c-c956-4ef3-adab-9b4f1fdc50e5" name="变更" comment="创建一个简单的RESTful风格的应用">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/controller/RestfulController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/controller/RestfulController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,8 +171,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1650337076028</updated>
-      <workItem from="1650337078340" duration="8490000" />
+      <workItem from="1650337078340" duration="9954000" />
     </task>
+    <task id="LOCAL-00001" summary="创建一个简单的RESTful风格的应用">
+      <created>1650352178160</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1650352178160</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,5 +199,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="创建一个简单的RESTful风格的应用" />
+    <option name="LAST_COMMIT_MESSAGE" value="创建一个简单的RESTful风格的应用" />
   </component>
 </project>
