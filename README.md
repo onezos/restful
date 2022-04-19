@@ -517,5 +517,137 @@ public class RestfulController {
 ![img.png](src/main/resources/img/img16.png)
 
 提交到github
+
+
+
 ![img.png](src/main/resources/img/img17.png)
+
+
+
+### 1.8 简单请求与非简单请求
+
+- 简单请求是指标准结构的HTTP请求，对应GET/POST请求
+- 非简单请求时复杂要求的HTTP请求，指PUT/DELETE、扩展标准请求
+- 两者最大区别是非简单请求发送前需要发送预检请求
+
+![img.png](src/main/resources/img/img18.png)
+
+修改程序来演示一下
+新建`Person`实体类
+```java
+package net.kokwind.restful.entity;
+
+public class Person {
+    private String name;
+    private Integer age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+}
+
+```
+添加传递参数
+```java
+package net.kokwind.restful.controller;
+
+import net.kokwind.restful.entity.Person;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/restful")
+public class RestfulController {
+    @GetMapping("/request")
+    public String doGetRequest() {
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"返回查询结果\"}";
+    }
+
+    // 发送post /restful/request/100请求
+    @PostMapping ("/request/{rid}")
+    public String doPostRequest(@PathVariable("rid") Integer requestId, Person person) {
+        System.out.println(person.getName() + ":" + person.getAge());
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"数据新建成功\",\"id\":"   + requestId + "}";
+    }
+
+    @PutMapping ("/request")
+    public String doPutRequest(Person person) {
+        System.out.println(person.getName() + ":" + person.getAge());
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"数据更新成功\"}";
+    }
+
+    @DeleteMapping("/request")
+    public String doDeleteRequest() {
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"数据删除成功\"}";
+    }
+}
+
+```
+网页文件里添加`data:"name=zhangsan&age=20",`
+```html
+        $(function(){
+            $("#btnPost").click(function(){
+                $.ajax({
+                    url:"/restful/request/100",
+                    type:"post",
+                    data:"name=zhangsan&age=20",
+                    dataType:"json",
+                    success:function(json){
+                        $("#message").text(json.message + " " + json.id);
+                    }
+                })
+            })
+        })
+
+        $(function(){
+            $("#btnPut").click(function(){
+                $.ajax({
+                    url:"/restful/request",
+                    type:"put",
+                    data:"name=zhangsan&age=20",
+                    dataType:"json",
+                    success:function(json){
+                        $("#message").text(json.message);
+                    }
+                })
+            })
+        })
+```
+打开网页测试
+
+![img.png](src/main/resources/img/img19.png)
+
+控制台输出，简单请求是可以直接得到数据的，而PUT得到的数据却是`null`
+```
+zhangsan:20
+null:null
+```
+
+我们需要在`web.xml`添加filter，来支持非简单请求
+```xml
+    <!-- 支持PUT/DELETE预处理 -->
+    <filter>
+        <filter-name>formContentFilter</filter-name>
+        <filter-class>org.springframework.web.filter.FormContentFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>formContentFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+```
 

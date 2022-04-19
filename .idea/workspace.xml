@@ -9,12 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b190276c-c956-4ef3-adab-9b4f1fdc50e5" name="变更" comment="创建一个简单的RESTful风格的应用">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img15.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img16.png" afterDir="false" />
+    <list default="true" id="b190276c-c956-4ef3-adab-9b4f1fdc50e5" name="变更" comment="添加1.7 RestController注解与路径变量">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/entity/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img19.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/controller/RestfulController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/controller/RestfulController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/client.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -171,7 +173,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1650337076028</updated>
-      <workItem from="1650337078340" duration="9954000" />
+      <workItem from="1650337078340" duration="11420000" />
     </task>
     <task id="LOCAL-00001" summary="创建一个简单的RESTful风格的应用">
       <created>1650352178160</created>
@@ -180,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650352178160</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="添加1.7 RestController注解与路径变量">
+      <created>1650353828579</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1650353828579</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,6 +209,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="创建一个简单的RESTful风格的应用" />
-    <option name="LAST_COMMIT_MESSAGE" value="创建一个简单的RESTful风格的应用" />
+    <MESSAGE value="添加1.7 RestController注解与路径变量" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加1.7 RestController注解与路径变量" />
   </component>
 </project>

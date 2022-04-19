@@ -1,5 +1,6 @@
 package net.kokwind.restful.controller;
 
+import net.kokwind.restful.entity.Person;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,13 +14,15 @@ public class RestfulController {
 
     // 发送post /restful/request/100请求
     @PostMapping ("/request/{rid}")
-    public String doPostRequest(@PathVariable("rid") Integer requestId) {
+    public String doPostRequest(@PathVariable("rid") Integer requestId, Person person) {
+        System.out.println(person.getName() + ":" + person.getAge());
         //双引号中如果包含双引号，要使用转移字符\来转义
         return "{\"message\":\"数据新建成功\",\"id\":"   + requestId + "}";
     }
 
     @PutMapping ("/request")
-    public String doPutRequest() {
+    public String doPutRequest(Person person) {
+        System.out.println(person.getName() + ":" + person.getAge());
         //双引号中如果包含双引号，要使用转移字符\来转义
         return "{\"message\":\"数据更新成功\"}";
     }
