@@ -651,3 +651,192 @@ null:null
     </filter-mapping>
 ```
 
+再次启动就可以正常得到数据了。
+
+
+
+### 1.9 JSON序列化
+
+#### 1.9.1 添加JSON依赖
+
+首先在`pom.xml`中添加`jackson`依赖
+
+```xml
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.13.1</version>
+        </dependency>
+```
+
+#### 1.9.2 新增请求单一数据的方法
+
+新建一个方法`getPerson`,返回一个Person对象,之所以没有使用`ModelAndView`，是因为在SpringMVC中，
+如果返回的是实体对象并且使用了`@RestController`注解，并且配置了`jackson`，
+那么SpringMVC会自动将返回的对象序列化为JSON格式。
+
+```java
+    @GetMapping("/person")
+    public Person getPerson(Integer id) {
+        Person person = new Person();
+        if(id == 1) {
+            person.setName("kokwind");
+            person.setAge(18);
+
+        } else if(id == 2) {
+            person.setName("kong");
+            person.setAge(20);
+        }
+        return person;
+    }
+```
+
+如果外部库中没有`jackson`,就需要手动重新加载一下。
+
+![img.png](src/main/resources/img/img20.png)
+
+然后放到输出目录中
+
+![img.png](src/main/resources/img/img21.png)
+
+启动Tomcat，打开网页测试
+
+![img.png](src/main/resources/img/img22.png)
+
+#### 1.9.3 新增请求多个数据的方法
+
+当请求的是多个对象时，使用List就可以了。
+
+```java
+    @GetMapping("/persons")
+    public List<Person> getPersons() {
+        List list = new ArrayList();
+        Person p1 = new Person();
+        p1.setName("kokwind");
+        p1.setAge(18);
+        list.add(p1);
+        Person p2 = new Person();
+        p2.setName("kong");
+        p2.setAge(20);
+        list.add(p2);
+        return list;
+    }
+```
+
+![img.png](src/main/resources/img/img23.png)
+
+接着修改网页文件，添加一个按钮
+```html
+<body>
+    <input type="button" id="btnGet" value="发送Get请求">
+    <input type="button" id="btnPost" value="发送post请求">
+    <input type="button" id="btnPut" value="发送Put请求">
+    <input type="button" id="btnDelete" value="发送Delete请求">
+    <h1 id="message"></h1>
+    <hr>
+    <input type="button" id="btnPersons" value="请求所有Person数据">
+</body>
+```
+添加对应的点击事件
+```javascript
+        $(function(){
+            $("#btnPersons").click(function(){
+                $.ajax({
+                    url:"/restful/persons",
+                    type:"get",
+                    dataType:"json",
+                    success:function(json){
+                        console.info(json);
+                    }
+                })
+            })
+        })
+```
+
+打开网页查看结果
+
+
+
+![img.png](src/main/resources/img/img24.png)
+
+在控制台可以看到输出的结果
+
+![img_1.png](src/main/resources/img/img25.png)
+
+
+
+#### 1.9.4 jackson对时间的处理
+当使用jackson时，出现日期时间的数据，默认从1970年开始算起，需要设置时间格式，
+通过添加`@JsonFormat`注解，可以设置时间格式。
+```java
+package net.kokwind.restful.entity;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
+public class Person {
+    private String name;
+    private Integer age;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date birthday;
+
+    public Person() {
+    }
+
+    public Person(String name, Integer age, Date birthday) {
+        this.name = name;
+        this.age = age;
+        this.birthday = birthday;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+}
+```
+
+在网页中增加日期的输出
+```javascript
+$("#divPersons").append("<h2>" + p.name + " - " + p.age + " - " + p.birthday +"</h2>");
+```
+
+方法中添加生日
+```java
+p1.setBirthday(new Date());
+```
+
+结果输出如下
+
+![img.png](src/main/resources/img/img26.png)
+

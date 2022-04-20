@@ -58,6 +58,23 @@
                 })
             })
         })
+
+        $(function(){
+            $("#btnPersons").click(function(){
+                $.ajax({
+                    url:"/restful/persons",
+                    type:"get",
+                    dataType:"json",
+                    success:function(json){
+                        console.info(json);
+                        for(var i = 0; i < json.length; i++){
+                            var p = json[i];
+                            $("#divPersons").append("<h2>" + p.name + " - " + p.age + " - " + p.birthday +"</h2>");
+                        }
+                    }
+                })
+            })
+        })
     </script>
 </head>
 <body>
@@ -66,5 +83,8 @@
     <input type="button" id="btnPut" value="发送Put请求">
     <input type="button" id="btnDelete" value="发送Delete请求">
     <h1 id="message"></h1>
+    <hr>
+    <input type="button" id="btnPersons" value="请求所有Person数据">
+    <div id="divPersons"></div>
 </body>
 </html>
