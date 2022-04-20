@@ -840,3 +840,197 @@ p1.setBirthday(new Date());
 
 ![img.png](src/main/resources/img/img26.png)
 
+
+
+
+
+## 2 浏览器的同源策略
+
+- 同源策略阻止从一个域加载的脚本去获取另一个域上的资源
+
+- 只要协议、域名、端口有任何一个不同，都被当错时不同的域名
+
+- 浏览器Console看到Access-Control-Allow-Origin就代表跨域了
+
+
+
+### 2.1 HTML中允许跨域的标签
+
+- `<img>` - 显示远程图片
+- `<scipt>` - 加载远程JS
+- `<link>` - 加载远程CSS
+
+
+
+### 2.2 CORS跨域资源访问
+
+- CORS是一种机制，使用额外的HTTP头通知浏览器可以访问其它域
+- URL响应头包含Access-Control-*置名请求允许跨域
+
+
+
+### 2.3 Spring MVC解决跨域访问
+
+- `@CrossOrigin` - Controller跨域注解
+- `<mvc:cors>` - Spring MVC全局跨域配置
+
+
+
+### 2.4 实现跨域访问
+
+复制一份restful工程起名为restful8080
+
+修改配置
+
+![img.png](src/main/resources/img/img27.png)
+
+![img_1.png](src/main/resources/img/img28.png)
+
+![img_2.png](src/main/resources/img/img29.png)
+
+![img_3.png](src/main/resources/img/img30.png)
+
+ 修改请求代码
+```javascript
+        $(function(){
+            $("#btnPersons").click(function(){
+                $.ajax({
+                    url:"http://localhost/restful/persons",
+                    type:"get",
+                    dataType:"json",
+                    success:function(json){
+                        console.info(json);
+                        for(var i = 0; i < json.length; i++){
+                            var p = json[i];
+                            $("#divPersons").append("<h2>" + p.name + " - " + p.age + " - " + p.birthday +"</h2>");
+                        }
+                    }
+                })
+            })
+        })
+```
+
+启动restful的Tomcat，端口80
+启动restful8080的Tomcat，端口8080
+
+打开网页
+
+
+
+![img.png](src/main/resources/img/img31.png)
+
+
+
+看到`No 'Access-Control-Allow-Origin'`就代表不支持跨域访问
+
+
+![img.png](src/main/resources/img/img32.png)
+
+
+
+要想支持跨域，只需要添加`@CrossOrigin`注解即可
+
+修改restful控制器的代码
+
+```java
+package net.kokwind.restful.controller;
+
+import net.kokwind.restful.entity.Person;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@RestController
+@RequestMapping("/restful")
+//maxAge是预检请求缓存时间，一小时内PUT/DELETE请求不会再次发送预检请求，maxAge=0表示不缓存，maxAge<0表示不缓存，maxAge>0表示缓存多少秒，默认是-1
+@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
+public class RestfulController {
+    @GetMapping("/request")
+    public String doGetRequest() {
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"返回查询结果\"}";
+    }
+
+    // 发送post /restful/request/100请求
+    @PostMapping ("/request/{rid}")
+    public String doPostRequest(@PathVariable("rid") Integer requestId, Person person) {
+        System.out.println(person.getName() + ":" + person.getAge());
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"数据新建成功\",\"id\":"   + requestId + "}";
+    }
+
+    @PutMapping ("/request")
+    public String doPutRequest(Person person) {
+        System.out.println(person.getName() + ":" + person.getAge());
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"数据更新成功\"}";
+    }
+
+    @DeleteMapping("/request")
+    public String doDeleteRequest() {
+        //双引号中如果包含双引号，要使用转移字符\来转义
+        return "{\"message\":\"数据删除成功\"}";
+    }
+
+    @GetMapping("/person")
+    public Person getPerson(Integer id) {
+        Person person = new Person();
+        if(id == 1) {
+            person.setName("kokwind");
+            person.setAge(18);
+
+        } else if(id == 2) {
+            person.setName("kong");
+            person.setAge(20);
+        }
+        return person;
+    }
+
+    @GetMapping("/persons")
+    public List<Person> getPersons() {
+        List list = new ArrayList();
+        Person p1 = new Person();
+        p1.setName("kokwind");
+        p1.setAge(18);
+        p1.setBirthday(new Date());
+        list.add(p1);
+        Person p2 = new Person();
+        p2.setName("kong");
+        p2.setAge(20);
+        p2.setBirthday(new Date());
+        list.add(p2);
+        return list;
+    }
+}
+
+```
+
+重启Tomcat，打开网页再次测试，就可以取得数据了
+
+![img.png](src/main/resources/img/img33.png)
+
+在请求头中看到`Sec-Fetch-Mode: cors`说明我这个请求要跨域访问了。
+而restful项目中增加了支持跨域的注解，所以响应的时候就会验证是否允许`Vary: Access-Control-Request-Method`。
+
+
+
+### 2.5 跨域请求的全局配置
+
+只需要在`applicationCcontext.xml`中添加`<mvc:cors>`即可
+
+```xml
+    <!-- 跨域访问全局配置 -->
+    <mvc:cors>
+        <mvc:mapping path="/restful/**"
+                    allowed-origins="http://localhost:8080,http://www.kokwind.net"
+                    max-age="3600"/>
+    </mvc:cors>
+```
+
+在restful中注释掉`//@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)`
+
+打开网页测试
+
+![img.png](src/main/resources/img/img34.png)

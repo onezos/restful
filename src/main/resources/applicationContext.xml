@@ -54,6 +54,12 @@
     </mvc:annotation-driven>
     <!-- 将图片/JS/CSS等静态资源排除在外，可提高执行效率 -->
     <mvc:default-servlet-handler/>
+    <!-- 跨域访问全局配置 -->
+    <mvc:cors>
+        <mvc:mapping path="/restful/**"
+                    allowed-origins="http://localhost:8080,http://www.kokwind.net"
+                    max-age="3600"/>
+    </mvc:cors>
 
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">

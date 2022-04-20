@@ -9,22 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b190276c-c956-4ef3-adab-9b4f1fdc50e5" name="变更" comment="添加1.8 简单请求与非简单请求">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img20.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img21.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img22.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img23.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img24.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img25.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img26.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/restful_Web_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/restful_Web_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b190276c-c956-4ef3-adab-9b4f1fdc50e5" name="变更" comment="添加1.9 JSON序列化">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img27.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img28.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img29.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img30.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img31.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img33.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img34.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/controller/RestfulController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/controller/RestfulController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/entity/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/entity/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +182,7 @@
       <option name="presentableId" value="Default" />
       <updated>1650337076028</updated>
       <workItem from="1650337078340" duration="11568000" />
-      <workItem from="1650410047167" duration="4211000" />
+      <workItem from="1650410047167" duration="7486000" />
     </task>
     <task id="LOCAL-00001" summary="创建一个简单的RESTful风格的应用">
       <created>1650352178160</created>
@@ -208,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650355191111</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="添加1.9 JSON序列化">
+      <created>1650414339052</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1650414339052</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,6 +234,7 @@
     <MESSAGE value="创建一个简单的RESTful风格的应用" />
     <MESSAGE value="添加1.7 RestController注解与路径变量" />
     <MESSAGE value="添加1.8 简单请求与非简单请求" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加1.8 简单请求与非简单请求" />
+    <MESSAGE value="添加1.9 JSON序列化" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加1.9 JSON序列化" />
   </component>
 </project>

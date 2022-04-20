@@ -9,6 +9,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/restful")
+//maxAge是预检请求缓存时间，一小时内PUT/DELETE请求不会再次发送预检请求，maxAge=0表示不缓存，maxAge<0表示不缓存，maxAge>0表示缓存多少秒，默认是-1
+//@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
 public class RestfulController {
     @GetMapping("/request")
     public String doGetRequest() {
