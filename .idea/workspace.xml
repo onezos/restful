@@ -9,18 +9,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b190276c-c956-4ef3-adab-9b4f1fdc50e5" name="变更" comment="添加1.9 JSON序列化">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img27.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img28.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img29.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img30.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img31.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img33.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img34.png" afterDir="false" />
+    <list default="true" id="b190276c-c956-4ef3-adab-9b4f1fdc50e5" name="变更" comment="添加2 跨域访问">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/interceptor/AccessHistoryInterception.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/interceptor/MyInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img35.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img36.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img37.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img38.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img39.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img40.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img41.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/img42.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/restful_Web_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/restful_Web_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/controller/RestfulController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/kokwind/restful/controller/RestfulController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,22 +64,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/gdd93/Documents/project/restful/src/main/webapp",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "工件",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "spring.configuration.checksum": "37fe884a14e4c34d3b8506a5186dda8d"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gdd93/Documents/project/restful/src/main/webapp&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;工件&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;37fe884a14e4c34d3b8506a5186dda8d&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gdd93\Documents\project\restful\src\main\webapp" />
@@ -182,7 +186,8 @@
       <option name="presentableId" value="Default" />
       <updated>1650337076028</updated>
       <workItem from="1650337078340" duration="11568000" />
-      <workItem from="1650410047167" duration="7486000" />
+      <workItem from="1650410047167" duration="7816000" />
+      <workItem from="1650420452453" duration="9508000" />
     </task>
     <task id="LOCAL-00001" summary="创建一个简单的RESTful风格的应用">
       <created>1650352178160</created>
@@ -212,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650414339052</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="添加2 跨域访问">
+      <created>1650420044085</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1650420044085</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,6 +247,7 @@
     <MESSAGE value="添加1.7 RestController注解与路径变量" />
     <MESSAGE value="添加1.8 简单请求与非简单请求" />
     <MESSAGE value="添加1.9 JSON序列化" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加1.9 JSON序列化" />
+    <MESSAGE value="添加2 跨域访问" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加2 跨域访问" />
   </component>
 </project>

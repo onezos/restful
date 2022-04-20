@@ -1034,3 +1034,248 @@ public class RestfulController {
 打开网页测试
 
 ![img.png](src/main/resources/img/img34.png)
+
+
+
+## 3 拦截器 - Interceptor
+
+- 拦截器（Interceptor）用于对URL请求进行前置/后置过滤
+- Interceptor与Filter用途类似，但实现方式不同
+  - Interceptor是Spring MVC的标准组件，创建以后是运行在IoC容器中的
+  - Filter是J2EE的标准组件
+
+- Interceptor底层就是基于Spring AOP面向切面编程实现
+
+
+
+### 3.1 拦截器开发流程
+
+- Maven依赖servlet-api
+- 实现HandlerInterceptor接口
+- applicationContext配置过滤地址
+
+
+#### 3.1.1 Maven依赖servlet-api
+
+```xml
+        <!-- 增加拦截器依赖， provided代表只有在开发编译才会引用，打包会排除在外 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+```
+
+#### 3.1.2 实现HandlerInterceptor接口
+
+使用快捷键alt+del打开
+
+![img.png](src/main/resources/img/img35.png)
+
+也可以直接用ctrl+i
+
+
+
+![img.png](src/main/resources/img/img36.png)
+
+
+
+- preHandle - 前置执行处理
+- postHandle - 目标资源已被Spring MVC框架处理
+- afterCompletion - 响应wen'ben
+
+新建interceptor包
+新建MyInterceptor类
+
+```java
+package net.kokwind.restful.interceptor;
+
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyInterceptor implements HandlerInterceptor {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        System.out.println(request.getRequestURL() + "- 准备执行");
+        return true;
+    }
+
+    //当目标的URL被处理完了后就会执行这个方法
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        System.out.println(request.getRequestURL() + "- 目标处理成功");
+    }
+    
+    //当目标的URL响应文本产生以后就会执行这个方法
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println(request.getRequestURL() + "- 响应内容已产生");
+    }
+}
+```
+
+#### 3.1.3 applicationContext配置过滤地址
+
+```xml
+    <!-- 拦截器配置 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/restful/**"/>
+            <mvc:mapping path="/webapi/**"/>
+            <mvc:exclude-mapping path="/**.ico"/>
+            <mvc:exclude-mapping path="/**.jpg"/>
+            <mvc:exclude-mapping path="/**.gif"/>
+            <mvc:exclude-mapping path="/**.js"/>
+            <mvc:exclude-mapping path="/**.css"/>
+            <mvc:exclude-mapping path="/resources/**"/>
+            <bean class="net.kokwind.restful.interceptor.MyInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+```
+
+### 3.2 拦截器的使用
+
+打开网页测试
+
+![img.png](src/main/resources/img/img37.png)
+
+控制台输出
+
+```
+http://localhost/restful/persons- 准备执行
+http://localhost/restful/persons- 目标处理成功
+http://localhost/restful/persons- 响应内容已产生
+```
+
+
+
+### 3.3 开发用户流量拦截器
+#### 3.3.1 增加logback日志输出
+在`pom.xml`中增加`logback-classic`依赖
+```xml
+        <!-- 增加日志输出 -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.11</version>
+        </dependency>
+```
+
+在`resources`新建`logback.xml`配置文件
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!-- 日志输出主体格式配置 -->
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>[%thread] %d %level %logger{10} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <!-- 日志输出级别 -->
+  <root level="debug">
+    <appender-ref ref="console"/>
+  </root>
+</configuration>
+```
+
+如果想要增加日志存储，继续添加配置。
+
+```xml
+    <!-- 存储日志 -->
+    <appender name="accessHistoryLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>d:/logs/history.%d.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%thread] %d %level %logger{10} - %msg%n</pattern>
+        </encoder>
+    </appender>
+```
+要想使它生效，需要添加logger配置。注明哪个类使用本地日志。
+`additivity="false"`表示写入文件的日志，不重复输出到控制台。
+
+```xml
+    <logger name="net.kokwind.restful.interceptor.AccessHistoryInterception"
+            level="INFO" additivity="false">
+        <appender-ref ref="accessHistoryLog"/>
+    </logger>
+```
+
+
+
+#### 3.3.2 配合拦截器配置logback日志输出
+
+新建软件包`interceptor`
+
+新建类`AccessHistoryInterception`
+
+```java
+package net.kokwind.restful.interceptor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class AccessHistoryInterception implements HandlerInterceptor {
+    //用户请求拦截，分析用户信息，记录用户访问记录
+    private Logger logger = LoggerFactory.getLogger(AccessHistoryInterception.class);
+
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //控制log输出内容
+        StringBuilder log = new StringBuilder();
+        //获取用户的IP地址
+        log.append(request.getRemoteAddr());
+        //分割线
+        log.append("|");
+        //获取用户的浏览器信息
+        log.append(request.getHeader("User-Agent"));
+        //分割线
+        log.append("|");
+        //获取用户的请求URL
+        log.append(request.getRequestURL());
+        logger.info(log.toString());
+        return true;
+    }
+}
+```
+
+
+
+在`applicationContext.xml`配置`interceptor`
+
+```xml
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/resources/**"/>
+            <bean class="net.kokwind.restful.interceptor.AccessHistoryInterception"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+```
+
+重启Tomcat进行测试
+
+![img_1.png](src/main/resources/img/img39.png)
+
+本地也看到输出的日志文件
+
+![img.png](src/main/resources/img/img38.png)
+
+![img.png](src/main/resources/img/img40.png)
+
+
+
+
+
+## 4 Spring MVC处理流程
+
+![img_1.png](src/main/resources/img/img42.png)
+
+![img.png](src/main/resources/img/img41.png)
+
